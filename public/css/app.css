@@ -10476,7 +10476,20 @@ a {
   color: black;
 }
 
+.margin-left-20 {
+  margin-left: 20px;
+}
+
 nav {
   margin-bottom: 60px;
+}
+
+.right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
