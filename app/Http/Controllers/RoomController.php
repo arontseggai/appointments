@@ -14,7 +14,9 @@ class RoomController extends Controller
      */
     public function index()
     {
-        return view('rooms.index');
+        $rooms = Room::all();
+
+        return view('rooms.index', compact('rooms'));
     }
 
     /**
@@ -35,7 +37,9 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->createRoom($request);
+
+        return redirect()->action('RoomController@index');
     }
 
     /**
@@ -46,7 +50,7 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-        //
+        return $room;
     }
 
     /**
@@ -81,5 +85,10 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         //
+    }
+
+    private function createRoom(Request $request)
+    {
+        $room = Room::create($request->input());
     }
 }
