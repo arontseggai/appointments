@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Room;
+use App\Bed;
 use Illuminate\Http\Request;
 
-class RoomController extends Controller
+class BedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::all();
+        $beds = Bed::all();
 
-        return view('rooms.index', compact('rooms'));
+        return view('beds.index', compact('beds'));
     }
 
     /**
@@ -26,7 +26,7 @@ class RoomController extends Controller
      */
     public function create()
     {
-        return view('rooms.create');
+        return view('beds.create');
     }
 
     /**
@@ -37,62 +37,64 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $this->createRoom($request);
+        $this->createBed($request);
 
-        return redirect()->action('RoomController@index');
+        return redirect()->action('BedController@index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Room  $room
+     * @param  \App\Bed  $bed
      * @return \Illuminate\Http\Response
      */
-    public function show(Room $room)
+    public function show(Bed $bed)
     {
-        return view('rooms.show', compact('room'));
+        return view('beds.show', compact('bed'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Room  $room
+     * @param  \App\Bed  $bed
      * @return \Illuminate\Http\Response
      */
-    public function edit(Room $room)
+    public function edit(Bed $bed)
     {
-        return view('rooms.edit', compact('room'));
+        return view('beds.edit', compact('bed'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Room  $room
+     * @param  \App\Bed  $bed
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request, Bed $bed)
     {
-        $room->update($request->all());
+        $bed->update($request->all());
 
-        return redirect()->route('rooms.index');
+        return redirect()->route('beds.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Room  $room
+     * @param  \App\Bed  $bed
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Room $room)
+    public function destroy(Bed $bed)
     {
-        $room->delete();
+        $bed->delete();
 
-        return redirect()->route('rooms.index');
+
+        return redirect()->route('beds.index');
     }
 
-    private function createRoom(Request $request)
+    private function createBed(Request $request)
     {
-        $room = Room::create($request->input());
+        $bed = Bed::create($request->input());
     }
 }

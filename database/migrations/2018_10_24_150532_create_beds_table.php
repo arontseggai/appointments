@@ -16,7 +16,7 @@ class CreateBedsTable extends Migration
         Schema::create('beds', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('room_id')->unsigned();
+            $table->unsignedInteger('room_id')->unsigned()->nullable();
             $table->foreign('room_id')->references('id')->on('rooms');
 
             $table->timestamps();

@@ -18,9 +18,6 @@
                 <!-- Authentication Links -->
                 @guest
                 <li class="nav-item">
-                    <a href="{!! action('RoomController@create'); !!}" class="nav-link">Create Room</a>
-                </li>
-                <li class="nav-item">
                     @if (Route::has('register'))
                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
