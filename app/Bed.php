@@ -15,12 +15,22 @@ class Bed extends Model
 
 
     /**
-     * A User can have many articles.
+     * A Bed can belong to A Room
      *
      * @return void
      */
     public function room()
     {
         return $this->belongsTo('App\Room');
+    }
+
+    /**
+     * A Bed can have many appointments.
+     *
+     * @return void
+     */
+    public function appointments()
+    {
+        return $this->hasMany('App\Appointment');
     }
 }

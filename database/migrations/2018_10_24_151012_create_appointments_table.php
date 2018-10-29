@@ -19,10 +19,10 @@ class CreateAppointmentsTable extends Migration
             $table->timestamp('start_date');
             $table->timestamp('end_date');
 
-            $table->unsignedInteger('user_id')->unsigned();
+            $table->unsignedInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->unsignedInteger('bed_id')->unsigned();
+            $table->unsignedInteger('bed_id')->unsigned()->nullable();
             $table->foreign('bed_id')->references('id')->on('beds');
 
             $table->timestamps();
