@@ -39,7 +39,7 @@ class AppointmentController extends Controller
     {
         $this->createAppointment($request);
 
-        return redirect()->action('appointmentController@index');
+        return redirect()->action('AppointmentController@index');
     }
 
     /**

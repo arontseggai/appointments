@@ -8,6 +8,69 @@ use Carbon\Carbon;
 class Appointment extends Model
 {
     /**
+     * The different life stages of an appointment
+     *
+     *
+     */
+    const STATUS_UNCONFIRMED    = 1;
+    const STATUS_CONFIRMED      = 2;
+    const STATUS_ACTIVE         = 3;
+    const STATUS_INACTIVE       = 4;
+    const STATUS_CANCELLED      = 5;
+
+    /**
+     * Return list of status codes and labels
+
+     * @return array
+     */
+    public static function listStatus()
+    {
+        return [
+            self::STATUS_UNCONFIRMED   => 'Unconfirmed',
+            self::STATUS_CONFIRMED => 'Confirmed',
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_INACTIVE  => 'Inactive',
+            self::STATUS_CANCELLED  => 'Cancelled'
+        ];
+    }
+
+    /**
+     * Returns label of actual status
+
+     * @param string
+     */
+    public function statusLabel()
+    {
+        $list = self::listStatus();
+
+        // Validation incase somebody messes up and saves a faulty status in the DB
+        return isset($list[$this->status])
+            ? $list[$this->status]
+            : $this->status;
+    }
+
+    public function isConfirmed()
+    {
+        return $this->status == self::STATUS_CONFIRMED;
+    }
+
+    public function isActive()
+    {
+        return $this->status == self::STATUS_ACTIVE;
+    }
+
+    public function statusConfirmed()
+    {
+        $this->status = self::STATUS_CONFIRMED;
+    }
+
+    public function statusActive()
+    {
+        $this->status = self::STATUS_ACTIVE;
+    }
+
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

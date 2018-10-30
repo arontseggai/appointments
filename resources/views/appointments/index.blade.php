@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row justify-content-md-center">
-        <div class="col col-md-6">
+        <div class="col col-md-8">
             <div class="content-container">
                 <h3>Appointments</h3>
                 <a href="{!! action('AppointmentController@create'); !!}"><button class="btn btn-outline-primary btn-sm">New</button></a>
@@ -31,8 +31,8 @@
                             <td>New</td>
                             <td class="right">
                                 <a href="{!! action('AppointmentController@show', $appointment); !!}" class="card-link"><button class="btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i></button></a>
-                                <a href="{!! action('AppointmentController@edit', $bed); !!}" class="card-link"><button class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button></a>
-                                <form action="{{ route('appointment.destroy', $appointment) }}" method="POST">
+                                <a href="{!! action('AppointmentController@edit', $appointment); !!}" class="card-link"><button class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button></a>
+                                <form action="{{ route('appointments.destroy', $appointment) }}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button class="btn btn-outline-danger btn-sm margin-left-20"><i class="fas fa-trash-alt"></i></button>
