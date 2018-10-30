@@ -28,7 +28,7 @@
                             <td>Bert Broodje</td>
                             <td>01-01-2019</td>
                             <td>01-03-2019</td>
-                            <td>New</td>
+                            <td>{{ $appointment->statusLabel($appointment->status) }}</td>
                             <td class="right">
                                 <a href="{!! action('AppointmentController@show', $appointment); !!}" class="card-link"><button class="btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i></button></a>
                                 <a href="{!! action('AppointmentController@edit', $appointment); !!}" class="card-link"><button class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button></a>

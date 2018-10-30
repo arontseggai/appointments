@@ -5,9 +5,15 @@
 </div>
 
 <div class="form-group">
-        {!! Form::label('end_date', 'End Date') !!}
-        {!! Form::date('end_date', $appointment->end_date, ['class'=> 'form-control']) !!}
-    </div>
+    {!! Form::label('end_date', 'End Date') !!}
+    {!! Form::date('end_date', $appointment->end_date, ['class'=> 'form-control']) !!}
+</div>
+
+<div class="form-group">
+    {!! Form::label('status', 'Confirmed') !!}
+    {{-- {!! Form::checkbox('status', $appointment->status) !!} --}}
+    {!! Form::select('status', $appointment->listStatus(), $appointment->status); !!}
+</div>
 
 
 <div class="form-group">

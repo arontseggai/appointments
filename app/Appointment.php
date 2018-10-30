@@ -12,11 +12,11 @@ class Appointment extends Model
      *
      *
      */
-    const STATUS_UNCONFIRMED    = 1;
-    const STATUS_CONFIRMED      = 2;
-    const STATUS_ACTIVE         = 3;
-    const STATUS_INACTIVE       = 4;
-    const STATUS_CANCELLED      = 5;
+    const STATUS_UNCONFIRMED    = 0;
+    const STATUS_CONFIRMED      = 1;
+    const STATUS_ACTIVE         = 2;
+    const STATUS_INACTIVE       = 3;
+    const STATUS_CANCELLED      = 4;
 
     /**
      * Return list of status codes and labels
@@ -59,14 +59,19 @@ class Appointment extends Model
         return $this->status == self::STATUS_ACTIVE;
     }
 
+    public function statusUnconfirmed()
+    {
+        return $this->status = self::STATUS_UNCONFIRMED;
+    }
+
     public function statusConfirmed()
     {
-        $this->status = self::STATUS_CONFIRMED;
+        return $this->status = self::STATUS_CONFIRMED;
     }
 
     public function statusActive()
     {
-        $this->status = self::STATUS_ACTIVE;
+        return $this->status = self::STATUS_ACTIVE;
     }
 
 

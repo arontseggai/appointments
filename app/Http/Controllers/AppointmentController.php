@@ -73,7 +73,7 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, Appointment $appointment)
     {
-        $appointment->update($request->all());
+        $this->updateAppointment($request, $appointment);
 
         return redirect()->route('appointments.index');
     }
@@ -95,6 +95,11 @@ class AppointmentController extends Controller
 
     private function createAppointment(Request $request)
     {
-        $appointment = Appointment::create($request->input());
+        return Appointment::create($request->input());
+    }
+
+    private function updateAppointment(Request $request, Appointment $appointment)
+    {
+        return $appointment->update($request->input());
     }
 }

@@ -15,9 +15,9 @@ class CreateAppointmentsTable extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('status')->default(1);
+            $table->integer('status')->default(0);
             $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->timestamp('end_date')->nullable();
 
             $table->unsignedInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
