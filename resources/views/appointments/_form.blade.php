@@ -11,9 +11,15 @@
 
 <div class="form-group">
     {!! Form::label('status', 'Confirmed') !!}
-    {{-- {!! Form::checkbox('status', $appointment->status) !!} --}}
     {!! Form::select('status', $appointment->listStatus(), $appointment->status); !!}
 </div>
+
+
+<div class="form-group">
+        {!! Form::label('bed', 'Pick available bed') !!}
+        {!! Form::select('bed', $bedsList, $appointment->bed, ['placeholder' => 'None']); !!}
+    </div>
+
 
 
 <div class="form-group">

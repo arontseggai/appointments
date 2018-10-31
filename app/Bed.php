@@ -11,8 +11,7 @@ class Bed extends Model
      *
      * @var array
      */
-    protected $guarded = [];
-
+    protected $protected = [];
 
     /**
      * A Bed can belong to A Room

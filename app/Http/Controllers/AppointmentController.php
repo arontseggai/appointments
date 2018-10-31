@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Appointment;
+use App\Bed;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -14,9 +15,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::all();
-
-        return view('appointments.index', compact('appointments'));
+        return view('appointments.index');
     }
 
     /**
@@ -26,7 +25,9 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        return view('appointments.create');
+        $bedsList = $this->getBedsList(Bed::all());
+
+        return view('appointments.create', compact('bedsList'));
     }
 
     /**
@@ -37,6 +38,7 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->input());
         $this->createAppointment($request);
 
         return redirect()->action('AppointmentController@index');
@@ -101,5 +103,14 @@ class AppointmentController extends Controller
     private function updateAppointment(Request $request, Appointment $appointment)
     {
         return $appointment->update($request->input());
+    }
+
+    private function getBedsList($beds)
+    {
+        $bedsList = $beds->mapWithKeys(function ($resource) {
+            return [$resource->id => "B{$resource->id}"];
+        });
+
+        return $bedsList;
     }
 }
