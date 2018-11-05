@@ -16,8 +16,9 @@
 
 
 <div class="form-group">
-        {!! Form::label('bed', 'Pick available bed') !!}
-        {!! Form::select('bed', $bedsList, $appointment->bed, ['placeholder' => 'None']); !!}
+        {!! Form::label('bed_id', 'Pick available bed') !!}
+        {{-- {!! dd($appointment) !!} --}}
+        {!! Form::select('bed_id', $bedsList, $appointment->bed_id, ['placeholder' => 'None']); !!}
     </div>
 
 
