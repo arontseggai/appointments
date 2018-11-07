@@ -43,7 +43,7 @@ class ReservationService
         return $appointment;
     }
 
-    private function updateAppointment(Request $request, Appointment $appointment)
+    public function updateAppointment(Request $request, Appointment $appointment)
     {
         $bedId = $request->input('bed_id');
         $appointment->bed()->associate($bedId);
