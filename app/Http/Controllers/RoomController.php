@@ -3,10 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Room;
+use App\Bed;
+use App\Services\ReservationService;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
+    protected $reservationService;
+
+    /**
+     * __construct
+     *
+     * @param ReservationService $reservationService
+     * @return void
+     *
+     * Loads reservation service Api dependency
+     *
+     */
+    public function __construct (ReservationService $reservationService) {
+        $this->reservationService = $reservationService;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -73,7 +91,7 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        $room->update($request->all());
+        $this->updateRoom($request, $room);
 
         return redirect()->route('rooms.index');
     }
@@ -91,8 +109,17 @@ class RoomController extends Controller
         return redirect()->route('rooms.index');
     }
 
-    private function createRoom(Request $request)
+    public function createRoom(Request $request)
     {
         $room = Room::create($request->input());
     }
+
+    public function updateRoom(Request $request, Room $room)
+    {
+        $room->update($request->all());
+    }
+
 }
+
+
+

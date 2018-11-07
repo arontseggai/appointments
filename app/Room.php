@@ -22,4 +22,9 @@ class Room extends Model
     {
         return $this->hasMany('App\Bed');
     }
+
+    public function getNameAttribute()
+    {
+        return "B({$this->id})";
+    }
 }

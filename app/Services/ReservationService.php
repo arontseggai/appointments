@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Appointment;
 use App\Bed;
+use App\Room;
 use Illuminate\Http\Request;
 
 class ReservationService
@@ -11,6 +12,11 @@ class ReservationService
     public function getAllBeds()
     {
         return Bed::all();
+    }
+
+    public function getAllRooms()
+    {
+        return Room::all();
     }
 
 
@@ -37,7 +43,7 @@ class ReservationService
         return $appointment;
     }
 
-    public function updateAppointment(Request $request, Appointment $appointment)
+    private function updateAppointment(Request $request, Appointment $appointment)
     {
         $bedId = $request->input('bed_id');
         $appointment->bed()->associate($bedId);
@@ -55,7 +61,6 @@ class ReservationService
     */
     public function getBedsList()
     {
-
         $bedsList = $this->getAllBeds()->mapWithKeys(function ($resource) {
             return [$resource->id => "B{$resource->id}"];
         });
@@ -63,4 +68,12 @@ class ReservationService
         return $bedsList;
     }
 
+    public function getRoomsList()
+    {
+        $roomsList = $this->getAllRooms()->mapWithKeys(function ($resource) {
+            return [$resource->id => "R{$resource->id}"];
+        });
+
+        return $roomsList;
+    }
 }

@@ -3,10 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Bed;
+use App\Room;
+use App\Services\ReservationService;
 use Illuminate\Http\Request;
 
 class BedController extends Controller
 {
+    protected $reservationService;
+
+    /**
+     * __construct
+     *
+     * @param ReservationService $reservationService
+     * @return void
+     *
+     * Loads reservation service Api dependency
+     *
+     */
+    public function __construct (ReservationService $reservationService) {
+        $this->reservationService = $reservationService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +31,7 @@ class BedController extends Controller
      */
     public function index()
     {
-        $beds = Bed::all();
-
+        $beds = $this->reservationService->getAllBeds();
         return view('beds.index', compact('beds'));
     }
 
@@ -26,7 +42,9 @@ class BedController extends Controller
      */
     public function create()
     {
-        return view('beds.create');
+        $rooms = $this->reservationService->getRoomsList();
+
+        return view('beds.create', compact('rooms'));
     }
 
     /**
@@ -37,7 +55,7 @@ class BedController extends Controller
      */
     public function store(Request $request)
     {
-        $this->createBed($request);
+        $this->reservationService->createBed($request);
 
         return redirect()->action('BedController@index');
     }
@@ -61,7 +79,9 @@ class BedController extends Controller
      */
     public function edit(Bed $bed)
     {
-        return view('beds.edit', compact('bed'));
+        $rooms = $this->reservationService->getRoomsList();
+
+        return view('beds.edit', compact('bed', 'rooms'));
     }
 
     /**
@@ -91,10 +111,5 @@ class BedController extends Controller
 
 
         return redirect()->route('beds.index');
-    }
-
-    private function createBed(Request $request)
-    {
-        $bed = Bed::create($request->input());
     }
 }

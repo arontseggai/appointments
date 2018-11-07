@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Appointment;
-use App\Bed;
 use App\Services\ReservationService;
 use Illuminate\Http\Request;
 
@@ -32,7 +31,7 @@ class AppointmentController extends Controller
     */
     public function index()
     {
-        $appointments = Appointment::all();
+        $appointments = $this->reservationService->getAllAppointments();
 
         return view('appointments.index', compact('appointments'));
     }
