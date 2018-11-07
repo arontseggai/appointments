@@ -17,7 +17,7 @@ class CreateBedsTable extends Migration
             $table->increments('id');
 
             $table->unsignedInteger('room_id')->unsigned()->nullable();
-            $table->foreign('room_id')->references('id')->on('rooms');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('set null');
 
             $table->timestamps();
         });

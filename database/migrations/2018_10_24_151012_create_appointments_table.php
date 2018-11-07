@@ -23,7 +23,7 @@ class CreateAppointmentsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->unsignedInteger('bed_id')->unsigned()->nullable();
-            $table->foreign('bed_id')->references('id')->on('beds');
+            $table->foreign('bed_id')->references('id')->on('beds')->onDelete('set null');
 
             $table->timestamps();
         });
