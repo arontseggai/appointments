@@ -4,10 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Appointment;
 use App\Bed;
+use App\Services\ReservationService;
 use Illuminate\Http\Request;
+
 
 class AppointmentController extends Controller
 {
+    protected $reservationService;
+
+    /**
+     * __construct
+     *
+     * @param ReservationService $reservationService
+     * @return void
+     *
+     * Loads reservation service Api dependency
+     *
+     */
+    public function __construct (ReservationService $reservationService) {
+        $this->reservationService = $reservationService;
+      }
+
     /**
     * Display a listing of the resource.
     *
@@ -27,7 +44,7 @@ class AppointmentController extends Controller
     */
     public function create()
     {
-        $bedsList = $this->getBedsList(Bed::all());
+        $bedsList = $this->reservationService->getBedsList();
 
         return view('appointments.create', compact('bedsList'));
     }
@@ -40,14 +57,7 @@ class AppointmentController extends Controller
     */
     public function store(Request $request)
     {
-        $appointment = $this->createAppointment($request);
-        $bedId = $request->input('bed_id');
-
-        if( $bedId !== null) {
-            $bed = (Bed::findOrFail($bedId));
-
-            $bed ? $this->asssociateBed($bed, $appointment) : null ;
-        }
+        $appointment = $this->reservationService->createAppointment($request);
 
         return redirect()->action('AppointmentController@index');
     }
@@ -71,7 +81,7 @@ class AppointmentController extends Controller
     */
     public function edit(Appointment $appointment)
     {
-        $bedsList = $this->getBedsList(Bed::all());
+        $bedsList = $this->reservationService->getBedsList();
 
         return view('appointments.edit', compact('appointment', 'bedsList'));
     }
@@ -85,7 +95,7 @@ class AppointmentController extends Controller
     */
     public function update(Request $request, Appointment $appointment)
     {
-        $this->updateAppointment($request, $appointment);
+        $this->reservationService->updateAppointment($request, $appointment);
 
         return redirect()->route('appointments.index');
     }
@@ -101,47 +111,6 @@ class AppointmentController extends Controller
     {
         $appointment->delete();
 
-
         return redirect()->route('appointments.index');
-    }
-
-    private function createAppointment(Request $request)
-    {
-        return Appointment::create($request->input());
-    }
-
-    private function updateAppointment(Request $request, Appointment $appointment)
-    {
-        $bedId = $request->input('bed_id');
-        $appointment->bed()->associate($bedId);
-        $appointment->save();
-        $appointment->update($request->input());
-    }
-
-    /**
-    * Return a list of bed id's and fake bed names for usability.
-    *
-    * @param mixed $beds
-    * @return void
-    */
-    private function getBedsList($beds)
-    {
-        $bedsList = $beds->mapWithKeys(function ($resource) {
-            return [$resource->id => "B{$resource->id}"];
-        });
-
-        return $bedsList;
-    }
-
-    /**
-    * Asssociate Appointment with Bed
-    *
-    * @param Bed $bed
-    * @param Appointment $appointment
-    * @return void
-    */
-    private function asssociateBed(Bed $bed, Appointment $appointment)
-    {
-        $appointment->bed()->associate($bed)->save();;
     }
 }
