@@ -10481,7 +10481,11 @@ a {
 }
 
 nav {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
+}
+
+.nav-tabs {
+  margin-bottom: 40px;
 }
 
 .right {
@@ -10500,5 +10504,9 @@ nav {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.nav-tabs .nav-item:first-child {
+  margin-left: 10%;
 }
 

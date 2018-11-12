@@ -26,15 +26,7 @@
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
                 @else
-                <li class="{{ Request::url()== url('appointments') ? 'nav-item active' : 'nav-item' }}">
-                    <a class="nav-link" href="{{ url('appointments') }}">Appointments</a>
-                </li>
-                <li class="{{ Request::url()== url('beds') ? 'nav-item active' : 'nav-item' }}">
-                    <a class="nav-link" href="{{ url('beds') }}">Beds</a>
-                </li>
-                <li class="{{ Request::url()== url('rooms') ? 'nav-item active' : 'nav-item' }}">
-                    <a class="nav-link" href="{{ url('rooms') }}">Rooms</a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
@@ -67,3 +59,21 @@
 </div>
 </div>
 </nav>
+
+<ul class="nav nav-tabs">
+    @role('employee')
+    <li class="nav-item">
+        <a class="{{ Request::url()== url('appointments') ? 'nav-link active' : 'nav-link' }}" href="{{ url('appointments') }}">Appointments</a>
+    </li>
+    <li class="nav-item">
+        <a class="{{ Request::url()== url('beds') ? 'nav-link active' : 'nav-link' }}" href="{{ url('beds') }}">Beds</a>
+    </li>
+    <li class="nav-item">
+        <a class="{{ Request::url()== url('rooms') ? 'nav-link active' : 'nav-link' }}" href="{{ url('rooms') }}">Rooms</a>
+    </li>
+    @endrole
+
+    @role('patient')
+
+    @endrole
+  </ul>
