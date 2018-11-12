@@ -61,7 +61,7 @@
 </nav>
 
 <ul class="nav nav-tabs">
-    @role('employee')
+    @hasanyrole('super-admin|employee')
     <li class="nav-item">
         <a class="{{ Request::url()== url('appointments') ? 'nav-link active' : 'nav-link' }}" href="{{ url('appointments') }}">Appointments</a>
     </li>
@@ -71,7 +71,7 @@
     <li class="nav-item">
         <a class="{{ Request::url()== url('rooms') ? 'nav-link active' : 'nav-link' }}" href="{{ url('rooms') }}">Rooms</a>
     </li>
-    @endrole
+    @endhasanyrole
 
     @role('patient')
 

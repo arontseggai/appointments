@@ -19,6 +19,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('rooms', 'RoomController')->middleware('auth');
-Route::resource('beds', 'BedController')->middleware('auth');
-Route::resource('appointments', 'AppointmentController')->middleware('auth');
+
+Route::group(['middleware' => ['role:employee|super-admin']], function () {
+    Route::resource('rooms', 'RoomController')->middleware('auth');
+    Route::resource('beds', 'BedController')->middleware('auth');
+    Route::resource('appointments', 'AppointmentController')->middleware('auth');
+});
+
+Route::group(['middleware' => ['role:patient|super-admin']], function () {
+
+});
