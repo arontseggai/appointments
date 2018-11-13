@@ -24,6 +24,10 @@ class ReservationService
         return Room::all();
     }
 
+    public function getAvailableRooms()
+    {
+        return Room::doesnthave('beds')->get();
+    }
 
     public function getAllAppointments() {
         return Appointment::all();
@@ -79,11 +83,17 @@ class ReservationService
         return $bedsList;
     }
 
-    public function getRoomsList()
+    public function getRoomsList(Bed $bed = NULL)
     {
-        $roomsList = $this->getAllRooms()->mapWithKeys(function ($resource) {
+        $roomsList = $this->getAvailableRooms()->mapWithKeys(function ($resource) {
             return [$resource->id => "R{$resource->id}"];
         });
+
+        if($bed !== NULL && $bed->room !== NULL) {
+            $room = $bed->room;
+
+            $roomsList[$room->id] = "R{$room->id}";
+        }
 
         return $roomsList;
     }

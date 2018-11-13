@@ -79,7 +79,7 @@ class BedController extends Controller
      */
     public function edit(Bed $bed)
     {
-        $rooms = $this->reservationService->getRoomsList();
+        $rooms = $this->reservationService->getRoomsList($bed);
 
         return view('beds.edit', compact('bed', 'rooms'));
     }
