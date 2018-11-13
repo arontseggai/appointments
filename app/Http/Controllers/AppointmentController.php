@@ -80,7 +80,7 @@ class AppointmentController extends Controller
     */
     public function edit(Appointment $appointment)
     {
-        $bedsList = $this->reservationService->getBedsList();
+        $bedsList = $this->reservationService->getBedsList($appointment);
 
         return view('appointments.edit', compact('appointment', 'bedsList'));
     }

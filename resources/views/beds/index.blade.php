@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row justify-content-md-center">
-        <div class="col col-md-6">
+        <div class="col col-md-8">
             <div class="content-container">
                 <h3>Beds</h3>
                 <a href="{!! action('BedController@create'); !!}"><button class="btn btn-outline-primary btn-sm">New</button></a>
