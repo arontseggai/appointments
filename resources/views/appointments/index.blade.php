@@ -14,6 +14,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Appointment</th>
                             <th scope="col">Patient</th>
                             <th scope="col">Start Date</th>
                             <th scope="col">End Date</th>
@@ -25,6 +26,7 @@
                         @foreach ($appointments as $indexKey =>$appointment)
                         <tr>
                             <th scope="row">{{ $indexKey + 1 }}</th>
+                            <td>A{{$appointment->id}}</td>
                             <td>Bert Broodje</td>
                             <td>01-01-2019</td>
                             <td>01-03-2019</td>
