@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Appointment;
 use App\Bed;
 use App\Room;
+use App\User;
 use Illuminate\Http\Request;
 
 class ReservationService
@@ -58,6 +59,11 @@ class ReservationService
         $appointment->bed()->associate($bedId);
         $appointment->save();
         $appointment->update($request->input());
+    }
+
+    public function updateUser(Request $request, User $user)
+    {
+        $user->update($request->all());
     }
 
 
