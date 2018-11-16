@@ -7,6 +7,7 @@ use App\Bed;
 use App\Room;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationService
 {
@@ -43,11 +44,18 @@ class ReservationService
     {
         $appointment = Appointment::create($request->input());
         $bedId = $request->input('bed_id');
+        $employeeId = $request->input('employee_id');
 
         if( $bedId !== null) {
             $bed = (Bed::findOrFail($bedId));
 
             $bed ? $appointment->bed()->associate($bed)->save() : null ;
+        }
+
+        if( $employeeId !== null) {
+            $employee = (User::findOrFail($employeeId));
+
+            $employee ? $appointment->employee()->associate($employee)->save() : null ;
         }
 
         return $appointment;
@@ -56,7 +64,9 @@ class ReservationService
     public function updateAppointment(Request $request, Appointment $appointment)
     {
         $bedId = $request->input('bed_id');
+        $employeeId = $request->input('employee_id');
         $appointment->bed()->associate($bedId);
+        $appointment->employee()->associate($employeeId);
         $appointment->save();
         $appointment->update($request->input());
     }
@@ -102,5 +112,14 @@ class ReservationService
         }
 
         return $roomsList;
+    }
+
+    public function getEmployeesList()
+    {
+        $user = Auth::user();
+        $employees = User::role('employee')->get()->pluck('name', 'id');
+        $employees[$user->id] = $user->name . ' (assign to self)';
+
+        return $employees;
     }
 }

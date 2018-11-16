@@ -16,10 +16,18 @@
 
 
 <div class="form-group">
-        {!! Form::label('bed_id', 'Pick available bed') !!}
-        {{-- {!! dd($appointment) !!} --}}
-        {!! Form::select('bed_id', $bedsList, $appointment->bed_id, ['placeholder' => 'None']); !!}
-    </div>
+    {!! Form::label('bed_id', 'Pick available bed') !!}
+    {{-- {!! dd($appointment) !!} --}}
+    {!! Form::select('bed_id', $bedsList, $appointment->bed_id, ['placeholder' => 'None']); !!}
+</div>
+
+
+
+<div class="form-group">
+    {!! Form::label('employee_id', 'Assign employee') !!}
+    {{-- {!! dd($appointment) !!} --}}
+    {!! Form::select('employee_id', $employeesList, $appointment->employee_id, ['placeholder' => 'None']); !!}
+</div>
 
 
 

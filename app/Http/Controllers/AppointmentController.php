@@ -44,8 +44,9 @@ class AppointmentController extends Controller
     public function create()
     {
         $bedsList = $this->reservationService->getBedsList();
+        $employeesList = $this->reservationService->getEmployeesList();
 
-        return view('appointments.create', compact('bedsList'));
+        return view('appointments.create', compact('bedsList', 'employeesList'));
     }
 
     /**
@@ -81,8 +82,9 @@ class AppointmentController extends Controller
     public function edit(Appointment $appointment)
     {
         $bedsList = $this->reservationService->getBedsList($appointment);
+        $employeesList = $this->reservationService->getEmployeesList();
 
-        return view('appointments.edit', compact('appointment', 'bedsList'));
+        return view('appointments.edit', compact('appointment', 'bedsList', 'employeesList'));
     }
 
     /**
