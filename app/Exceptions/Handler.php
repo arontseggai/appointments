@@ -46,6 +46,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception->getStatusCode() == 403) {
+
+            return  redirect('login');
+        }
+
         return parent::render($request, $exception);
     }
 }
